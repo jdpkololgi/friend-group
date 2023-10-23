@@ -31,22 +31,18 @@ class network:
             else:
                 self.network.loc[namef][namei] = relation
         
-        
+our_network = network()
 
 class People:
-    def __init__(self, name:str, age:int | float, job:str):
+
+    def __init__(self, name:str, age:int | float, job:str, our_network:network):
         self.name = name
         self.age = age
         self.job = job
+        self.ournetwork = our_network
+        self.our_network.add_person(self.name)
+        self.relations = self.our_network.network.loc[self.name]
 
-        self.relationships = np.array([]) # A numpy array of names and the relationship between people
-
-    def add_relations(self, relation:str, name:str):
-        if relation in self.relationships:
-            self.relationships[relation].append(name)
-        else:
-            self.relationships[relation] = [name]
-
-# Your code to go here...
-
-#my_group =
+    def add_relation(self, namei:str, namef:str, relation:str, asymmtric_relation:str|None=None):
+        self.ournetwork.add_relationships(namei=namei, namef=namef, relation=relation, asymmetric_relation=asymmtric_relation)
+        
